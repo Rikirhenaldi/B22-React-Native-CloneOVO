@@ -30,7 +30,7 @@ class Login extends Component {
           message: 'Your Number Not Yet Register',
           type: 'info',
           backgroundColor: '#870139',
-          duration: 60,
+          duration: 1000,
         });
         this.props.clearMessage();
       } else if (this.props.auth.token  !== null ) {
@@ -38,7 +38,7 @@ class Login extends Component {
           message: 'Login Succesfully',
           type: 'info',
           backgroundColor: '#8f74b5',
-          duration: 60,
+          duration: 1000,
         });
       return this.props.navigation.reset({index: 0, routes: [{name: 'loginpin'}]});
       }

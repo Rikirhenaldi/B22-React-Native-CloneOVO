@@ -2,16 +2,33 @@
  * @format
  */
 
+import React from 'react';
 import {AppRegistry} from 'react-native';
+import 'react-native-gesture-handler';
+import PushNotification from 'react-native-push-notification';
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/integration/react';
 import App from './App';
 import {name as appName} from './app.json';
-import 'react-native-gesture-handler';
-import {Provider} from 'react-redux';
-import React from 'react';
-
 import reduxConfig from './src/redux/store';
-import {PersistGate} from 'redux-persist/integration/react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const redux = reduxConfig();
+
+// let tokenFCM = null;
+
+PushNotification.configure({
+  onRegister: function (token) {
+    console.log('TOKENFCM:', token.token);
+    AsyncStorage.setItem('tokenFCM', token.token);
+    // tokenFCM = token.token
+    // redux.store.dispatch({type: 'DEVICE_REGISTER_TOKEN', payload: token.token});
+  },
+});
+
+PushNotification.createChannel({
+  channelId: 'general',
+  channelName: 'general notification',
+});
 
 const Main = () => {
   return (

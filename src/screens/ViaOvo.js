@@ -11,7 +11,7 @@ import { showMessage, hideMessage } from 'react-native-flash-message';
 class ViaOvo extends Component {
   constructor(props) {
     super(props);
-    this.state =  {phone: '', amount: '' };
+    this.state =  {phone: '', amount: 0 };
   }
   componentDidMount(){
     const {token} = this.props.auth;
@@ -37,13 +37,12 @@ class ViaOvo extends Component {
           backgroundColor: '#870139',
           duration: 1000,
         });
-        return this.props.navigation.reset({index: 0, routes: [{name: 'Home'}]});
       } else if (this.props.users.sccMsg === 'Reciver User not Found'){
         showMessage({
           message: 'Reciver User not Found',
           type: 'info',
           backgroundColor: '#870139',
-          duration: 1000,
+          duration: 10,
         });
       }
     });

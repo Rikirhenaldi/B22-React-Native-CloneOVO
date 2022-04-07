@@ -10,7 +10,7 @@ import { showMessage, hideMessage } from 'react-native-flash-message';
 class TopUp extends Component {
   constructor(props) {
     super(props);
-    this.state =  {amount: '' };
+    this.state =  {amount: 0, };
   }
   componentDidMount(){
     const {token} = this.props.auth;
@@ -36,10 +36,10 @@ class TopUp extends Component {
           backgroundColor: '#870139',
           duration: 1000,
         });
-        return this.props.navigation.reset({index: 0, routes: [{name: 'Home'}]});
       }
     });
   }
+
 
   render() {
     const {data} = this.props.users;
@@ -108,6 +108,7 @@ class TopUp extends Component {
                   placeholderTextColor: 'blueGray.50',
                 }}
                 keyboardType="numeric"
+                value={this.state.value}
                 onChangeText={(value) => this.setState({amount: value})}
               />
             </View>

@@ -6,6 +6,7 @@ import ActionButton from '../components/ActionButton';
 import { connect } from 'react-redux';
 import { showMessage, hideMessage } from 'react-native-flash-message';
 import { authLoginPin } from '../redux/actions/auth';
+import { clearMessage } from '../redux/actions/auth';
 
 class LoginPin extends Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class LoginPin extends Component {
     const {pin} = this.state;
     const {token} = this.props.auth;
     this.props.authLoginPin(pin, token).then(()=> {
-      if (this.props.auth.errMsg === undefined || this.props.auth.errMsg === 'Login failed'){
+      if (this.props.auth.errMsg === 'Login failed' || this.props.auth.errMsg !== ''){
         showMessage({
           message: 'Login Failed',
           type: 'info',
@@ -139,5 +140,5 @@ const styles = StyleSheet.create({
   const mapStateToprops = state => ({
     auth: state.auth,
   });
-const mapDispatchToProps = {authLoginPin};
+const mapDispatchToProps = {authLoginPin, clearMessage};
 export default connect(mapStateToprops, mapDispatchToProps)(LoginPin);

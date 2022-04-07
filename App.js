@@ -23,6 +23,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import FoundationIcon from 'react-native-vector-icons/Foundation';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
 import Notifications from './src/screens/Notifications';
+import PaymentPulsa from './src/screens/KonfirmasiPembayaran'
 import Profile from './src/screens/Profile';
 import ViaOvo from './src/screens/ViaOvo';
 import {connect} from 'react-redux';
@@ -30,6 +31,7 @@ import {connect} from 'react-redux';
 import FlashMessage from 'react-native-flash-message';
 import EditProfile from './src/screens/EditProfile';
 import LoginPin from './src/screens/LoginPin';
+import KonfirmasiPembayaran from './src/screens/KonfirmasiPembayaran';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -102,6 +104,12 @@ const BottomTab = () => {
 };
 
 class App extends Component {
+  // componentDidMount() {
+  //   this.props.dispatch({
+  //     type: 'DEVICE_REGISTER_TOKEN',
+  //     payload: this.props.tokenFCM,
+  //   });
+  // }
   render() {
     const example = null;
     const {token} = this.props.auth;
@@ -224,7 +232,6 @@ class App extends Component {
                     headerTransparent: false,
                   }}
                   name="pulsa"
-                  
                 />
                 <Stack.Screen
                   component={VoucherGame}
@@ -261,6 +268,16 @@ class App extends Component {
                     headerTransparent: true,
                   }}
                   name="notification"
+                />
+                <Stack.Screen
+                  component={KonfirmasiPembayaran}
+                  options={{
+                    header: Headers,
+                    title: 'konfirmasipembayaran',
+                    cardStyle: {backgroundColor: '#694e99'},
+                    headerTransparent: false,
+                  }}
+                  name="konfirmasi pembayaran"
                 />
                 <Stack.Screen
                   component={Profile}

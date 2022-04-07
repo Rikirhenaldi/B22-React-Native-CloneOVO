@@ -80,3 +80,16 @@ export const authRegister = (name, phone, email, pin) => {
     type: 'SET_CLEAR_MESSAGE',
   });
 
+
+  export const registerToken = (authToken, notifToken) => {
+    return async dispatch => {
+      const form = new URLSearchParams({deviceToken: notifToken});
+      if (authToken) {
+        const {data} = await http(authToken).post(
+          `${API_URL}/users/deviceRegisterToken`,
+          form,
+        );
+      }
+      dispatch({type: 'DEVICE_REGISTER_TOKEN', payload: notifToken});
+    };
+  };

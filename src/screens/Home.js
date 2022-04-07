@@ -5,6 +5,9 @@ import React, {Component} from 'react';
 import {Text, View, StyleSheet, Image, TouchableOpacity, ScrollView, FlatList} from 'react-native';
 import { connect } from 'react-redux';
 import { getProfile } from '../redux/actions/users';
+import { registerToken } from '../redux/actions/auth';
+import PushNotification from 'react-native-push-notification';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class Home extends Component {
   constructor(props) {
@@ -27,6 +30,9 @@ class Home extends Component {
   componentDidMount(){
     const {token} = this.props.auth;
     this.props.getProfile(token);
+    AsyncStorage.getItem("tokenFCM").then((tokenFCM)=>{
+      this.props.registerToken(token, tokenFCM)
+    })
   }
   render() {
     const {data} = this.props.users;
@@ -80,6 +86,7 @@ class Home extends Component {
                 <FlatList
                 showsVerticalScrollIndicator={false}
                 numColumns={4}
+                style={styles.boxflatlist}
                 data={this.state.menu}
                 renderItem={({item}) => (
                   <View style={styles.listMenu}>
@@ -197,7 +204,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
-    width: 320,
+    width: 350,
     height: 70,
     marginTop: -30,
     backgroundColor: 'white',
@@ -206,15 +213,19 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   boxMenu: {
-    width: 320,
+    width: 350,
     height: 220,
     backgroundColor: 'white',
     margin: 20,
     borderRadius: 20,
     marginTop: -10,
-    padding: 20,
     flexDirection: 'row',
-    justifyContent: 'space-around',
+  },
+  boxflatlist: {
+    // backgroundColor: 'yellow',
+    width: 350,
+    justifyContent: "center",
+    alignItems: 'center'
   },
   boxPromo: {
     height: 220,
@@ -228,15 +239,20 @@ const styles = StyleSheet.create({
   },
   listMenu: {
     flexDirection: 'row',
+    width: 80,
+    height: 100,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   circleIcon: {
-    width: 60,
+    width: 80,
     height: 60,
     borderRadius: 30,
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: 8,
     marginTop: 20,
+    paddingRight: 8,
   },
   menuText: {
     color: '#694e99',
@@ -311,5 +327,5 @@ const mapStateToprops = state => ({
   auth: state.auth,
 });
 
-const mapDispatchToProps = {getProfile};
+const mapDispatchToProps = {getProfile, registerToken};
 export default connect(mapStateToprops, mapDispatchToProps)(Home);

@@ -5,6 +5,7 @@ const initialState = {
   errMsg: '',
   sccMsg: '',
   data : {},
+  tokenFCM: '',
 };
 
 const auth = (state = initialState, action) => {
@@ -51,6 +52,12 @@ const auth = (state = initialState, action) => {
         token: null,
         errMsg: '',
         sccMsg: '',
+      };
+    }
+    case 'DEVICE_REGISTER_TOKEN': {
+      return {
+        ...state,
+        tokenFCM: action.payload,
       };
     }
     default: {

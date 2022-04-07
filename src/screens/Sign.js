@@ -17,9 +17,9 @@ class Sign extends Component {
     e.preventDefault();
     const {name, phone, email, pin} = this.state;
     this.props.authRegister(name, phone, email, pin).then(()=> {
-      if (this.props.auth.errMsg === 'Format Phone number is wrong, number must start with 08 or +62 .. and length mor than 10'){
+      if (this.props.auth.errMsg === 'Format Phone number is wrong, number must start with 08 or +62 .. and length more than 10'){
         showMessage({
-          message: 'Format Phone number is wrong, number must start with 08 or +62 .. and length mor than 10',
+          message: 'Format Phone number is wrong',
           type: 'info',
           backgroundColor: '#870139',
           duration: 1000,
@@ -30,7 +30,7 @@ class Sign extends Component {
           message: 'You are not yet Input Right Email',
           type: 'info',
           backgroundColor: '#870139',
-          duration: 60,
+          duration: 1000,
         });
         this.props.clearMessage();
       } else if (this.props.auth.errMsg  === 'Pin length must be 6 digit'){
@@ -38,7 +38,7 @@ class Sign extends Component {
           message: 'Pin length must be 6 digit',
           type: 'info',
           backgroundColor: '#870139',
-          duration: 60,
+          duration: 900,
         });
         this.props.clearMessage();
       } else if (this.props.auth.sccMsg  === 'register succesfully') {
@@ -46,7 +46,7 @@ class Sign extends Component {
           message: 'Register Succesfully',
           type: 'info',
           backgroundColor: '#8f74b5',
-          duration: 60,
+          duration: 900,
         });
       return this.props.navigation.reset({index: 0, routes: [{name: 'login'}]});
       }

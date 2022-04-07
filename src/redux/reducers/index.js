@@ -5,7 +5,8 @@ import createAsyncStorage from 'redux-persist-react-native-async-storage';
 
 import auth from './auth';
 import users from './users';
-import transactions from './transactions'
+import transactions from './transactions';
+import history from './History';
 
 const storage = createAsyncStorage();
 
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   auth: persistReducer(persistAuth, auth),
   users,
   transactions,
+  history,
 });
 
 export default rootReducer;

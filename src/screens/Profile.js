@@ -16,11 +16,11 @@ class Profile extends Component {
         this.state =  {picture: null, name: '', phoneNumber: '' };
     }
     async componentDidMount(){
-        const user = await this.props?.users?.data
+        const user = await this.props?.users?.data;
         this.setState({picture: user.picture});
         this.setState({name: user.name});
-        this.setState({phoneNumber: user.phone}); 
-        console.log(this.state); 
+        this.setState({phoneNumber: user.phone});
+        console.log(this.state);
     }
   render() {
     return (
@@ -64,7 +64,7 @@ class Profile extends Component {
             <View style={styles.boxId}>
                 <Text style={styles.ovoId}>Akun</Text>
             </View>
-            <TouchableOpacity style={styles.buttonAkun} onPress={() => {this.props.navigation.navigate('editprofile')}}>
+            <TouchableOpacity style={styles.buttonAkun} onPress={() => {this.props.navigation.navigate('editprofile');}}>
                 <View style={styles.buttonValue} >
                     <FA5Icon name="user-edit" size={24} color={'#491a73'}/>
                     <Text style={styles.buttonText} >Edit Profile</Text>
@@ -232,21 +232,21 @@ const styles = StyleSheet.create({
     separator: {
         borderBottomWidth: 1,
         borderBottomColor: 'grey',
-        width: 310,
+        width: '90%',
         marginLeft: 20,
     },
     detail: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginTop: 10,
-        width: 320,
+        width: '90%',
         marginLeft: 20,
     },
     code: {
         flexDirection: 'row',
         justifyContent: 'space-around',
         marginTop: 10,
-        width: 320,
+        width: '90%',
         marginLeft: 20,
     },
     button: {
@@ -303,7 +303,7 @@ const styles = StyleSheet.create({
 });
 const mapStateToprops = state => ({
     users : state.users,
-})
+});
 
 const mapDispatchToProps = {authLogOut};
 
